@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" style="height:100%;margin:0px;">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script language="javascript" src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <title>File Metadata Microservice</title>
+</head>
+
+<body style="height:100%;">
+    <div style="height:100%;display: flex; align-items: center;" class="jumbotron ">
+        <form class="container" style="width:70%" method="post" enctype="multipart/form-data">
+            <div class="input-group mb-3">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile02" />
+                    <label class="custom-file-label" for="inputGroupFile02">Choose file</label>
+                </div>
+                <div class="input-group-append">
+                    <input type="submit" class="btn btn-primary" value="submit">
+                </div>
+            </div>
+        </form>
+    </div>
+    <script>
+        $('input[type="file"]').change(function(e) {
+            var fileName = e.target.files[0].name;
+            $('.custom-file-label').html(fileName);
+        });
+    </script>
+</body>
+
+</html>
