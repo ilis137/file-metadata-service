@@ -1,26 +1,25 @@
 const express = require("express")
 const multer = require("multer")
-const app = express()
-var upload = multer({ dest: "public/uploads/" })
-    // const storage = multer.diskStorage({
-    //     destination: (req, file, callback) => {
-    //         callback(null, "./uploads")
-    //     },
-    //     filename: (req, file, callback) => {
-    //         callback(null, file.fieldname + "_" + Date.now() + "_" + file.originalname)
-    //     }
-    // })
+const bodyParser = require("body-parser")
 
-// const upload = multer({ storage }).array("fileuploader", 1)
+const app = express()
+const upload = multer({ dest: "public/uploads/" })
+
+//apply middlewares
+app.use(bodyParser.json())
 app.use(express.static(__dirname + '/node_modules/bootstrap/dist'));
 app.use(express.static(__dirname + "/public"))
 
+
+//get root url
 app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/public/fileupload.html")
-})
-app.post("/", upload.any(), (req, res) => {
-    res.send(req.files)
-})
+        res.sendFile(__dirname + "/public/fileupload.html")
+    })
+    //post request for file
+app.post("/api/analysefile", upload.any(), (req, res) => {
+        res.send({ filesize: req.files[0].size + " bytes" })
+    })
+    //intialize server
 app.listen(3000, () => {
     console.log("server is up and running")
 })
